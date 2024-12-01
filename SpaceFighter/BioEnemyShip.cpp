@@ -13,15 +13,18 @@ BioEnemyShip::BioEnemyShip()
 
 void BioEnemyShip::Update(const GameTime& gameTime)
 {
+	//added and edited
+	float rand = (Math::GetRandomFloat() + .6) * 4;
 	if (IsActive())
 	{
-		float x = sin(gameTime.GetTotalTime() * Math::PI + GetIndex());
-		x *= GetSpeed() * gameTime.GetElapsedTime() * 1.4f;
-		TranslatePosition(x, GetSpeed() * gameTime.GetElapsedTime());
+		float x = cos(gameTime.GetTotalTime() * Math::PI + GetIndex());
+		x *= GetSpeed() * gameTime.GetElapsedTime() * 1.4f + rand;
+		float y = Math::GetRandomInt(30, 70) * gameTime.GetElapsedTime();
+		TranslatePosition(x, y);
 
 		if (!IsOnScreen()) Deactivate();
 	}
-
+	
 	EnemyShip::Update(gameTime);
 }
 
